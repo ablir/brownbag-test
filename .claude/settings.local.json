@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git --version)",
+      "Bash(gh:*)",
+      "Bash(git init:*)",
+      "Bash(brew install:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd GitHub PR template and initial repository documentation\n\n- Add comprehensive React frontend PR template with creator and reviewer checklists\n- Add SESSION_LOG.md documenting repository setup and GitHub integration\n- Add CLAUDE_INSTRUCTIONS.md for future Claude Code sessions\n- Configure repository for PR workflows with auto-populated descriptions\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
