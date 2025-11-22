@@ -39,9 +39,10 @@ Use the standard Claude Code PR workflow:
 ### Documentation Standards
 When working in this repository:
 1. **Always update `SESSION_LOG.md`** after completing significant tasks
-2. Document the date, query, actions taken, and outcomes
-3. Keep this file (`CLAUDE_INSTRUCTIONS.md`) updated with new processes or context
-4. Use clear markdown formatting for readability
+2. **Always update `USER_PROMPTS.md`** with new user prompts/queries
+3. Document the date, query, actions taken, and outcomes
+4. Keep this file (`CLAUDE_INSTRUCTIONS.md`) updated with new processes or context
+5. Use clear markdown formatting for readability
 
 ### Session Log Updates
 After each major interaction, append to `SESSION_LOG.md` with:
@@ -51,6 +52,13 @@ After each major interaction, append to `SESSION_LOG.md` with:
 - Tools used
 - Results and next steps
 - Any blockers or issues encountered
+
+### User Prompts Log
+After each user prompt, append to `USER_PROMPTS.md` with:
+- Sequential prompt number
+- The exact user prompt/query
+- Context of the request
+- Summary of results/actions taken
 
 ## Repository Purpose
 This repository is used for testing Claude Code functionality, specifically:
@@ -84,17 +92,22 @@ This repository is used for testing Claude Code functionality, specifically:
 ```
 Brownbag/
 ├── .git/                     # Git repository
+├── .github/                  # GitHub configuration
+│   └── pull_request_template.md  # React PR template with checklists
 ├── .claude/                  # Claude configuration
-├── SESSION_LOG.md            # Historical log of all interactions
+├── SESSION_LOG.md            # Historical log of all interactions and actions
+├── USER_PROMPTS.md           # Chronological log of all user prompts/queries
 ├── CLAUDE_INSTRUCTIONS.md    # This file - context for Claude
+├── README.md                 # Repository overview
 └── [project files]           # Future project content
 ```
 
 ## When Starting a New Session
-1. Read `SESSION_LOG.md` to understand previous interactions
-2. Read this file for current context and setup status
-3. Check git and gh status before making changes
-4. Update documentation after completing tasks
+1. Read `SESSION_LOG.md` to understand previous interactions and actions taken
+2. Read `USER_PROMPTS.md` to see the chronological user request history
+3. Read this file for current context and setup status
+4. Check git and gh status before making changes
+5. Update all relevant documentation after completing tasks
 
 ## Troubleshooting
 - If `gh` commands fail, check authentication status first
