@@ -7,7 +7,18 @@
       "Bash(brew install:*)",
       "Bash(git checkout:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nAdd GitHub PR template and initial repository documentation\n\n- Add comprehensive React frontend PR template with creator and reviewer checklists\n- Add SESSION_LOG.md documenting repository setup and GitHub integration\n- Add CLAUDE_INSTRUCTIONS.md for future Claude Code sessions\n- Configure repository for PR workflows with auto-populated descriptions\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd GitHub PR template and initial repository documentation\n\n- Add comprehensive React frontend PR template with creator and reviewer checklists\n- Add SESSION_LOG.md documenting repository setup and GitHub integration\n- Add CLAUDE_INSTRUCTIONS.md for future Claude Code sessions\n- Configure repository for PR workflows with auto-populated descriptions\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(cd:*)",
+      "Bash(npm install -D eslint@^8.57.0 eslint-config-airbnb eslint-config-airbnb-typescript eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier eslint-config-prettier eslint-plugin-prettier)",
+      "Bash(npm install -D --legacy-peer-deps eslint@^8.57.0 eslint-config-airbnb eslint-config-airbnb-typescript eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier eslint-config-prettier eslint-plugin-prettier)",
+      "Bash(npm init -y)",
+      "Bash(chmod:*)",
+      "Bash(./start.sh)",
+      "Bash(killall:*)",
+      "Bash(./stop.sh)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
