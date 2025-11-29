@@ -296,6 +296,95 @@ ISC
 3. Run linter and formatter
 4. Create a pull request
 
+## Automated Testing
+
+### Login Flow Testing with Email Notifications
+
+This project includes automated testing for the login flow using Playwright MCP (Model Context Protocol) with automatic email notifications.
+
+#### Overview
+
+The `/test-login` command performs the following:
+1. Navigates to the login page at http://localhost:5173
+2. Takes a screenshot of the initial login page
+3. Fills in the login form with test credentials
+4. Takes a screenshot of the filled form
+5. Submits the form and navigates to the user profile page
+6. Takes a screenshot of the user profile
+7. **Automatically sends an email** with all screenshots attached
+
+#### Setup Email Notifications
+
+1. **Copy the environment template:**
+```bash
+cp .env.example .env
+```
+
+2. **Configure Gmail credentials in `.env`:**
+```env
+GMAIL_SENDER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your-16-char-app-password
+TEST_EMAIL_RECIPIENT=recipient@example.com
+```
+
+3. **Generate Gmail App Password:**
+   - Go to https://myaccount.google.com/apppasswords
+   - Select "Mail" and "Other (Custom name)"
+   - Generate the password and copy it to `.env`
+
+#### Running Tests
+
+**Using the slash command:**
+```bash
+/test-login
+```
+
+This will:
+- Execute the complete login flow test
+- Capture 3 screenshots in `.playwright-mcp/.playwright-mcp/`
+- Send an email with HTML-formatted results and attached screenshots
+- Display success/failure status
+
+#### Email Contents
+
+Each test email includes:
+- **Subject:** "Login Flow Test Results - [timestamp]"
+- **Body:** HTML-formatted test summary with:
+  - Execution timestamp
+  - Test steps performed
+  - Results summary
+- **Attachments:**
+  - `01-login-page.png` - Initial login page
+  - `02-filled-login-form.png` - Form with test credentials
+  - `03-user-profile-page.png` - User profile after successful login
+
+#### Test Credentials
+
+The automated test uses:
+- Username: `testuser123`
+- Password: `password456`
+
+(Note: The application accepts any credentials as it uses mock authentication)
+
+#### Files
+
+- `.claude/commands/test-login.md` - Slash command definition
+- `.claude/scripts/send-test-email.py` - Email sending script
+- `.env.example` - Configuration template
+- `.env` - Your actual credentials (git-ignored)
+
+#### Troubleshooting
+
+**Email not sending:**
+- Verify Gmail credentials in `.env`
+- Ensure App Password is correct (not your regular Gmail password)
+- Check that 2-factor authentication is enabled on your Google account
+
+**Screenshots not found:**
+- Ensure the application is running on http://localhost:5173
+- Check that `.playwright-mcp/` directory exists
+- Verify Playwright MCP is properly configured
+
 ## Documentation
 
 See additional documentation:
