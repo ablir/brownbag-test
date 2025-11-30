@@ -342,3 +342,234 @@ The repository now maintains three complementary documentation files:
 3. **CLAUDE_INSTRUCTIONS.md**: How to work with the repository
 
 This creates a comprehensive audit trail of all interactions and decisions.
+
+---
+
+## Automated Email Testing for Login Flow
+
+### Date
+2025-11-25 (November 25, 2025)
+
+### User Query
+Execute `/test-login` command to test the login flow using Playwright MCP and automatically send the results via email.
+
+### Actions Taken
+
+#### 1. Login Flow Testing with Playwright MCP
+Executed comprehensive login flow test using Playwright MCP tools:
+
+**Step 1: Navigate to Application**
+```bash
+mcp__playwright__browser_navigate to http://localhost:5173
+```
+- Successfully loaded login page
+- Captured page snapshot with form elements
+
+**Step 2: Initial Screenshot**
+```bash
+mcp__playwright__browser_take_screenshot
+```
+- Saved: `.playwright-mcp/01-login-page.png`
+- Captured clean login form with username/password fields
+
+**Step 3: Fill Login Form**
+```bash
+mcp__playwright__browser_fill_form
+```
+- Username: `testuser123`
+- Password: `password456`
+- Successfully populated both fields
+
+**Step 4: Filled Form Screenshot**
+```bash
+mcp__playwright__browser_take_screenshot
+```
+- Saved: `.playwright-mcp/02-filled-login-form.png`
+- Captured form with credentials entered (password masked)
+
+**Step 5: Submit Form**
+```bash
+mcp__playwright__browser_click on "Sign In" button
+```
+- Successfully clicked sign-in button
+- Navigated to: http://localhost:5173/user-info
+- Mock user profile loaded (Toby Wintheiser)
+
+**Step 6: User Profile Screenshot**
+```bash
+mcp__playwright__browser_take_screenshot
+```
+- Saved: `.playwright-mcp/03-user-profile-page.png`
+- Captured complete user profile with:
+  - Username badge (testuser123)
+  - Generated user data (email, phone, address)
+  - Work information (company, job title)
+  - Activity timestamps (joined date, last login)
+
+#### 2. Automated Email Notification System
+
+**User Request**: Add automated email functionality to send screenshots after each test run.
+
+**Implementation Steps:**
+
+**Step 1: Email Script Creation**
+- Created `.claude/scripts/send-test-email.py`
+- Python script using Gmail SMTP (smtplib)
+- Features:
+  - Loads credentials from environment variables
+  - Attaches all three screenshots
+  - HTML-formatted email body
+  - Detailed status reporting
+  - Error handling and validation
+
+**Step 2: Environment Configuration**
+- Created `.env` file with Gmail credentials:
+  - `GMAIL_SENDER`: ablir.jm.dev@gmail.com
+  - `GMAIL_APP_PASSWORD`: (16-character app password)
+  - `TEST_EMAIL_RECIPIENT`: ablir.jm.dev@gmail.com
+- Created `.env.example` as configuration template
+- Verified `.env` is in `.gitignore` for security
+
+**Step 3: Update /test-login Command**
+- Modified `.claude/commands/test-login.md`
+- Added steps to:
+  - Load environment variables from `.env`
+  - Execute email script: `.claude/scripts/send-test-email.py`
+  - Report email sending status
+
+**Step 4: Testing**
+```bash
+set -a && source .env && set +a
+python3 .claude/scripts/send-test-email.py .playwright-mcp/.playwright-mcp/
+```
+- ✅ Successfully sent test email
+- All 3 screenshots attached
+- HTML formatting rendered correctly
+- Email delivered to ablir.jm.dev@gmail.com
+
+#### 3. Pull Request Creation
+
+**User Request**: Create separate PR for automated email testing that merges to the existing `feature/monorepo-setup` branch.
+
+**Step 1: Branch Creation**
+```bash
+git checkout -b feature/automated-email-testing
+```
+- Created new feature branch from `feature/monorepo-setup`
+- Branch name: `feature/automated-email-testing`
+
+**Step 2: Staging Changes**
+```bash
+git add .claude/commands/test-login.md
+git add .claude/scripts/send-test-email.py
+git add .env.example
+```
+- Staged only automated email testing files
+- Excluded `.env` (credentials protected by .gitignore)
+
+**Step 3: Commit**
+```bash
+git commit -m "Add automated email testing for login flow..."
+```
+- Commit hash: 4eab13c
+- 3 files changed, 128 insertions(+)
+- Comprehensive commit message with features and setup instructions
+
+**Step 4: Push to Remote**
+```bash
+git push -u origin feature/automated-email-testing
+```
+- Branch pushed to GitHub
+- Tracking configured
+
+**Step 5: Create Pull Request**
+```bash
+gh pr create --base feature/monorepo-setup --title "Add Automated Email Testing for Login Flow" --body "..."
+```
+- **PR #3**: https://github.com/ablir/brownbag-test/pull/3
+- **Title**: "Add Automated Email Testing for Login Flow"
+- **Base Branch**: feature/monorepo-setup (PR #2)
+- **Head Branch**: feature/automated-email-testing
+- **Merge Flow**: PR #3 → feature/monorepo-setup → main
+
+#### 4. Documentation Updates
+
+**Updated PROJECT_README.md**
+- Added comprehensive "Automated Testing" section
+- Included:
+  - Overview of `/test-login` command
+  - Setup instructions for email notifications
+  - Gmail App Password generation guide
+  - Running tests documentation
+  - Email contents description
+  - Test credentials reference
+  - File structure
+  - Troubleshooting guide
+
+**Updated SESSION_LOG.md** (this file)
+- Documented all actions from current session
+- Included Playwright test steps
+- Documented email system implementation
+- Recorded PR creation process
+- Added documentation update details
+
+**Updated USER_PROMPTS.md**
+- Added all user prompts from this session
+- Documented context and outcomes
+
+### Results
+
+#### Automated Testing System
+- ✅ Login flow fully automated with Playwright MCP
+- ✅ Automatic screenshot capture (3 images per test)
+- ✅ Email notification system integrated
+- ✅ HTML-formatted test results
+- ✅ Gmail SMTP configuration working
+
+#### Files Created
+1. `.claude/scripts/send-test-email.py` - Email sending script (executable)
+2. `.claude/commands/test-login.md` - Updated slash command
+3. `.env.example` - Configuration template
+4. `.env` - Credentials file (git-ignored)
+
+#### PR Structure
+```
+main
+└── feature/monorepo-setup (PR #2)
+    └── feature/automated-email-testing (PR #3) ← New PR
+```
+
+#### Email Test Results
+- **Subject**: Login Flow Test Results - 2025-11-25 00:50:08
+- **From**: ablir.jm.dev@gmail.com
+- **To**: ablir.jm.dev@gmail.com
+- **Attachments**: 3 screenshots (all successfully attached)
+- **Status**: ✅ Delivered successfully
+
+#### Command Workflow
+Every `/test-login` execution now:
+1. Runs Playwright browser automation
+2. Navigates through complete login flow
+3. Captures 3 screenshots at key stages
+4. Loads environment variables from `.env`
+5. Sends email with HTML results and attachments
+6. Reports success/failure status
+
+### Tools Used
+- **Playwright MCP**: Browser automation and screenshot capture
+- **Python 3**: Email script execution
+- **Gmail SMTP**: Email delivery (smtp.gmail.com:465)
+- **Git/GitHub CLI**: Branch management and PR creation
+- **Bash**: Environment variable management
+
+### Repository Status
+- Current branch: `feature/automated-email-testing`
+- Uncommitted changes: Configuration files (settings, MCP config)
+- Active PRs:
+  - PR #2: Complete Monorepo Setup (feature/monorepo-setup → main)
+  - PR #3: Add Automated Email Testing (feature/automated-email-testing → feature/monorepo-setup)
+
+### Next Steps
+- Review and merge PR #3 into feature/monorepo-setup
+- Test the complete workflow after merge
+- Eventually merge PR #2 to main with email testing included
