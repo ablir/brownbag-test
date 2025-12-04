@@ -20,9 +20,9 @@ export const LoginForm = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }} data-testid="auth-login-form">
       {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <Alert severity="error" sx={{ mb: 2 }} data-testid="auth-login-form-error">
           {error}
         </Alert>
       )}
@@ -39,6 +39,8 @@ export const LoginForm = () => {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         disabled={loading}
+        data-testid="auth-login-form-username"
+        inputProps={{ 'data-testid': 'auth-login-form-username-input' }}
       />
       <TextField
         margin="normal"
@@ -52,6 +54,8 @@ export const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         disabled={loading}
+        data-testid="auth-login-form-password"
+        inputProps={{ 'data-testid': 'auth-login-form-password-input' }}
       />
       <Button
         type="submit"
@@ -60,6 +64,7 @@ export const LoginForm = () => {
         sx={{ mt: 3, mb: 2 }}
         disabled={loading}
         startIcon={loading ? <CircularProgress size={20} /> : <LoginIcon />}
+        data-testid="auth-login-form-submit"
       >
         {loading ? 'Signing In...' : 'Sign In'}
       </Button>

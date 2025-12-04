@@ -34,14 +34,15 @@ interface UserProfileCardProps {
 
 export const UserProfileCard = ({ userInfo }: UserProfileCardProps) => {
   return (
-    <Card>
+    <Card data-testid="user-profile-card">
       <CardContent sx={{ textAlign: 'center' }}>
         <Avatar
           src={userInfo.avatar}
           alt={`${userInfo.firstName} ${userInfo.lastName}`}
           sx={{ width: 120, height: 120, margin: '0 auto 16px' }}
+          data-testid="user-profile-card-avatar"
         />
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom data-testid="user-profile-card-name">
           {userInfo.firstName} {userInfo.lastName}
         </Typography>
         <Chip
@@ -49,13 +50,18 @@ export const UserProfileCard = ({ userInfo }: UserProfileCardProps) => {
           label={userInfo.username}
           color="primary"
           sx={{ mb: 2 }}
+          data-testid="user-profile-card-username"
         />
-        <Typography variant="body2" color="text.secondary" paragraph>
+        <Typography variant="body2" color="text.secondary" paragraph data-testid="user-profile-card-bio">
           {userInfo.bio}
         </Typography>
         <Divider sx={{ my: 2 }} />
-        <InfoItem icon={Email} label="Email" value={userInfo.email} />
-        <InfoItem icon={Phone} label="Phone" value={userInfo.phone} />
+        <Box data-testid="user-profile-card-email">
+          <InfoItem icon={Email} label="Email" value={userInfo.email} />
+        </Box>
+        <Box data-testid="user-profile-card-phone">
+          <InfoItem icon={Phone} label="Phone" value={userInfo.phone} />
+        </Box>
       </CardContent>
     </Card>
   );

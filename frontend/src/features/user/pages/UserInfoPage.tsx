@@ -13,7 +13,7 @@ export const UserInfoPage = () => {
 
   if (loading) {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" data-testid="user-info-page-loading">
         <Box
           sx={{
             display: 'flex',
@@ -22,7 +22,7 @@ export const UserInfoPage = () => {
             minHeight: '100vh',
           }}
         >
-          <CircularProgress />
+          <CircularProgress data-testid="user-info-page-spinner" />
         </Box>
       </Container>
     );
@@ -30,19 +30,27 @@ export const UserInfoPage = () => {
 
   if (error || !userInfo) {
     return (
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" data-testid="user-info-page-error">
         <Box sx={{ mt: 4 }}>
-          <Typography color="error">{error || 'User not found'}</Typography>
+          <Typography color="error" data-testid="user-info-page-error-message">
+            {error || 'User not found'}
+          </Typography>
         </Box>
       </Container>
     );
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }} data-testid="user-info-page">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4">User Profile</Typography>
-        <Button variant="outlined" color="error" startIcon={<Logout />} onClick={logout}>
+        <Typography variant="h4" data-testid="user-info-page-title">User Profile</Typography>
+        <Button
+          variant="outlined"
+          color="error"
+          startIcon={<Logout />}
+          onClick={logout}
+          data-testid="user-info-page-logout"
+        >
           Logout
         </Button>
       </Box>

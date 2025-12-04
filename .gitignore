@@ -39,6 +39,10 @@ Thumbs.db
 # Testing
 coverage/
 .nyc_output/
+.test-results/
+frontend/coverage/
+e2e/node_modules/
+.playwright-mcp/
 
 # Temporary files
 tmp/
